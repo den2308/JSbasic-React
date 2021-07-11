@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ErrorCatchBoundary from './ErrorCatchBoundary'
 import './App.css';
 import ClassComponent from './ClassComponent'
 
@@ -17,12 +18,11 @@ function App() {
   }
   return (
     <div className="App">
-      <h1>John Weak</h1>
-      <button onClick={handlePulsCount}>Click</button>
-      {count === 0 ?
-        <ClassComponent count={count} setCount={handlePulsCount} title='John weak' /> :
-        <ClassComponent title='John Dou' />
-      }
+      <ErrorCatchBoundary>
+        <ClassComponent title={'John Weak'} />
+      </ErrorCatchBoundary>
+      <label htmlFor="testInput" className='asdas'>some label</label>
+      <input id='testInput' />
     </div>
   );
 }

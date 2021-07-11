@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 const ClassComponent = (props) => {
     const [state, setstate] = useState(10)
@@ -12,4 +13,10 @@ const ClassComponent = (props) => {
     )
 }
 
+ClassComponent.propTypes = {
+    title: PropTypes.string
+}
+
 export default ClassComponent
+
+
