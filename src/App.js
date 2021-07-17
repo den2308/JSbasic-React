@@ -1,30 +1,24 @@
-import { useState } from 'react'
+import { connect } from 'react-redux'
 import './App.css';
-import ClassComponent from './ClassComponent'
+import { getUser } from './store/actions/user'
 
-function App() {
-  const [count, setCount] = useState(0)
-  const handlePulsCount = () => {
-    setCount(count + 1)
-  }
-
-  const showComponents = () => {
-    if (count === 0) {
-      return <ClassComponent count={count} setCount={handlePulsCount} title='John weak' />
-    } else {
-      return <ClassComponent title='John Dou' />
-    }
-  }
+function App(props) {
   return (
     <div className="App">
-      <h1>John Weak</h1>
-      <button onClick={handlePulsCount}>Click</button>
-      {count === 0 ?
-        <ClassComponent count={count} setCount={handlePulsCount} title='John weak' /> :
-        <ClassComponent title='John Dou' />
-      }
+      <h1>{props.firstName}</h1>
+      <h1>{props.lastName}</h1>
+      <button onClick={() => { props.getUserAction() }}>Change state</button>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  firstName: state.user.firstName,
+  lastName: state.user.lastName
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  getUserAction: () => { dispatch(getUser()) }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
