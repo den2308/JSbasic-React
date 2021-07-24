@@ -9,7 +9,7 @@ export default (state = initialState(), action) => {
     switch (action.type) {
         case constants.GET_WEATHER_DATA:
             return {
-                weatherData: action.data
+                ...action.data
             }
         default: return state;
     }
