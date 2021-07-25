@@ -10,15 +10,16 @@ import WeatherPage from './WeatherPage'
 
 import './App.css';
 
-const App = () => (
+const App = (props) => (
   <div className="app">
+  <p>Login screen</p>
     <Router>
       <Switch>
         <Route path="/weather">
-          <WeatherPage />
+          <WeatherPage {...props} />
         </Route>
         <Route path="/login">
-          <LoginPage />
+          <LoginPage {...props} />
         </Route>
         <Redirect from="/" to="/login" />
       </Switch>

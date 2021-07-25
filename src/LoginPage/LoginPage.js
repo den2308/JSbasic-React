@@ -1,14 +1,13 @@
-import { useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { Form, Input, Button, Checkbox, Row, Col, notification } from 'antd';
 import { useHistory } from "react-router-dom";
 
 import { getUser } from '../store/actions/user'
 
-const LoginPage = () => {
+const LoginPage = ({ getUserThunk }) => {
     let history = useHistory();
-    const dispatch = useDispatch();
     const onFinish = () => {
-        dispatch(getUser({ autToken: 'autToken' }))
+        getUserThunk()
         history.push("/weather");
     };
 
@@ -21,7 +20,7 @@ const LoginPage = () => {
     };
 
     return (
-        <Row align='middle' justify='center'>
+        <Row align='middle' justify='center'>s
             <Col xs={10}>
                 <Form
                     name="basic"
@@ -62,4 +61,11 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage
+
+const mapDispatchToProps = (dispatch) => ({
+    getUserThunk: () => dispatch(
+        getUser({ autToken: 'autToken' }),
+    ),
+});
+
+export default connect(null, mapDispatchToProps)(LoginPage)
